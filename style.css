@@ -1,4 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 1px red dashed;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
 #messageDiv {
+    display: grid;
+    position: relative;
+    margin: 10px 0;
+    width: 50%;
+    justify-content: center;
     color: white;
     background-color: lightslategray;
 }
