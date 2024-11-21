@@ -9,6 +9,7 @@ header {
 }
 
 header ul {
+    width: 100%;
     display: inline-block;
 }
 
