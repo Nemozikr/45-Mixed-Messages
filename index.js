@@ -8,6 +8,7 @@ sentence = '';
 
 const paragraph = document.getElementById('mixMessageInput');
 const savedMessageField = document.getElementById('savedMessages');
+const saveButton = document.getElementById('saveMessage');
 
 function updateHTML() {
     paragraph.textContent = sentence;
@@ -105,6 +106,8 @@ function saveMessages() {
     localStorage.removeItem('mixed');
     localStorage.setItem('mixed', savedMixedMessages);
 }
+
+saveButton.addEventListener('click', saveMessages());
 
 console.log(makePhrase());
 console.log(grammarCheck())
