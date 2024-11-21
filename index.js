@@ -9,6 +9,7 @@ sentence = '';
 const paragraph = document.getElementById('mixMessageInput');
 const savedMessageField = document.getElementById('savedMessages');
 const saveButton = document.getElementById('saveMessage');
+const clearButton = document.getElementById('clearSaved');
 
 function updateHTML() {
     paragraph.textContent = sentence;
@@ -60,7 +61,7 @@ function grammarCheck() {
         //console.log(`words in sentence: ${word}`)
         if (word === 'A' || word === 'An')
         {
-            console.log(`A or An at index ${i}`)
+            //console.log(`A or An at index ${i}`)
             vowels.forEach(vowel => {
                 //console.log(temp);
                 let firstLetterOfSecondWord = temp[i + 1].charAt(0);
@@ -83,23 +84,33 @@ function grammarCheck() {
     updateHTML();
     return sentence;
 }
+makePhrase();
+grammarCheck();
 
 //browser functionality down there
 
 function retrieveSaved() {
     console.log('retrieveSaved() is invoked');
 
-    savedMixedMessages = [JSON.parse(localStorage.getItem('mixed'))] || [];
-    
+    // Retrieve and parse the data from localStorage
+    savedMixedMessages = JSON.parse(localStorage.getItem('mixed')) || [];
+
+    // Ensure it's a flat array
     if (!Array.isArray(savedMixedMessages)) {
         console.warn('Invalid data in localStorage, resetting to an empty array.');
         savedMixedMessages = [];
     }
 
-    savedMixedMessages.forEach(part => {
-        console.log(part);
-        savedMessageField.textContent += part;
-    })
+    // Create a string with sentences separated by newlines
+    let displayText = savedMixedMessages.join('<br>');
+
+    // Display the text in the desired field
+    savedMessageField.innerHTML = displayText;
+
+    // Log each sentence for debugging
+    savedMixedMessages.forEach((part, index) => {
+        console.log(`Sentence ${index + 1}: ${part}`);
+    });
 }
 
 function saveMessages() {
@@ -108,9 +119,10 @@ function saveMessages() {
         console.log('No sentence to save');
         return;
     }
+
     if (savedMixedMessages.length > 0) {
         console.log('Mixed messages exist locally');
-        
+
         // Check for duplicates
         if (savedMixedMessages.includes(sentence)) {
             console.log('It already exists');
@@ -130,9 +142,22 @@ function saveMessages() {
     retrieveSaved();
 }
 
+function clearSavedMessages() {
+    console.log('clearSavedMessages() is invoked');
 
-console.log(makePhrase());
-console.log(grammarCheck());
+    // Remove the data from localStorage
+    localStorage.removeItem('mixed');
 
+    // Reset the UI
+    savedMixedMessages = [];
+    savedMessageField.textContent = '';
+
+    console.log('All saved messages cleared.');
+}
+
+// Event Listeners
 saveButton.addEventListener('click', saveMessages);
+clearButton.addEventListener('click', clearSavedMessages);
+
+// Initial Load
 retrieveSaved();

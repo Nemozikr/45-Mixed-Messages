@@ -29,3 +29,7 @@ main {
     color: white;
     background-color: lightslategray;
 }
+
+#saved {
+    display: block;
+}
