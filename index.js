@@ -5,6 +5,12 @@ const vowels = ['a', 'e', 'i', 'o', 'u'];
 let message = [];
 sentence = '';
 
+const paragraph = document.getElementById('mixMessageInput');
+
+function updateHTML() {
+    paragraph.textContent = sentence;
+}
+
 function randomSize(max = 10, min = 1) {
     return  Math.floor(Math.random() * max) + min;
 }
@@ -29,6 +35,7 @@ function makePhrase(num = randomSize()) {
     sentence = (`${randomConnective()} ${makeMessage(num)}${randomPunct()}`);
     //console.log(sentence);
     sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+    updateHTML();
     return sentence;
 }
 
@@ -57,10 +64,10 @@ function grammarCheck() {
                 //console.log(`first letter of 2nd word: ${firstLetterOfSecondWord}`);
                 if (firstLetterOfSecondWord.toLowerCase() === vowel) {
                     temp[i] = 'An';
-                    console.log(`The letter is a vowel!`);
+                    //console.log(`The letter is a vowel!`);
                 } else if (firstLetterOfSecondWord.toLowerCase() !== vowel) {
                     temp[i] = 'A';
-                    console.log(`The letter is not a vowel.`);
+                    //console.log(`The letter is not a vowel.`);
                 } else {
                     throw Error("Error at grammar check on vowels, what did you do?");
                 }
@@ -69,7 +76,9 @@ function grammarCheck() {
         i++;
     })
     //console.log(temp)
-    return temp.join(" ");
+    sentence = temp.join(" ");
+    updateHTML();
+    return sentence;
 }
 
 console.log(makePhrase());
