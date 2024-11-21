@@ -3,7 +3,7 @@ const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 let message = [];
-const savedMixedMessages = [];
+let savedMixedMessages = [];
 sentence = '';
 
 const paragraph = document.getElementById('mixMessageInput');
@@ -84,31 +84,55 @@ function grammarCheck() {
     return sentence;
 }
 
+//browser functionality down there
+
 function retrieveSaved() {
-    if (localStorage.getItem('mixed')) {
-        let arr = localStorage.getItem('mixed');
-        arr.forEach(part => {
-            savedMessageField.textContent += part;
-        })
+    console.log('retrieveSaved() is invoked');
+
+    savedMixedMessages = [JSON.parse(localStorage.getItem('mixed'))] || [];
+    
+    if (!Array.isArray(savedMixedMessages)) {
+        console.warn('Invalid data in localStorage, resetting to an empty array.');
+        savedMixedMessages = [];
     }
+
+    savedMixedMessages.forEach(part => {
+        console.log(part);
+        savedMessageField.textContent += part;
+    })
 }
 
 function saveMessages() {
-    if (savedMixedMessages) {
-        savedMixedMessages.forEach(savedMessage => {
-            if (savedMessage === sentence) {
-                return 'It already exists';
-            } else {
-                savedMixedMessages.push(sentence);
-            }
-        })
+    console.log('saveMessages() is invoked');
+    if (!sentence) {
+        console.log('No sentence to save');
+        return;
     }
-    localStorage.removeItem('mixed');
-    localStorage.setItem('mixed', savedMixedMessages);
+    if (savedMixedMessages.length > 0) {
+        console.log('Mixed messages exist locally');
+        
+        // Check for duplicates
+        if (savedMixedMessages.includes(sentence)) {
+            console.log('It already exists');
+            return 'It already exists';
+        } else {
+            console.log('Sentence added!');
+            savedMixedMessages.push(sentence);
+        }
+    } else {
+        console.log('First sentence added!');
+        savedMixedMessages.push(sentence);
+        console.log(savedMixedMessages);
+    }
+
+    // Save updated messages to localStorage
+    localStorage.setItem('mixed', JSON.stringify(savedMixedMessages));
     retrieveSaved();
 }
 
-saveButton.addEventListener('click', saveMessages());
-retrieveSaved();
+
 console.log(makePhrase());
-console.log(grammarCheck())
+console.log(grammarCheck());
+
+saveButton.addEventListener('click', saveMessages);
+retrieveSaved();
