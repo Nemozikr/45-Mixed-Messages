@@ -105,9 +105,10 @@ function saveMessages() {
     }
     localStorage.removeItem('mixed');
     localStorage.setItem('mixed', savedMixedMessages);
+    retrieveSaved();
 }
 
 saveButton.addEventListener('click', saveMessages());
-
+retrieveSaved();
 console.log(makePhrase());
 console.log(grammarCheck())
