@@ -3,10 +3,11 @@ const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 let message = [];
-const savedMixedMessages = []
+const savedMixedMessages = [];
 sentence = '';
 
 const paragraph = document.getElementById('mixMessageInput');
+const savedMessageField = document.getElementById('savedMessages');
 
 function updateHTML() {
     paragraph.textContent = sentence;
@@ -80,6 +81,15 @@ function grammarCheck() {
     sentence = temp.join(" ");
     updateHTML();
     return sentence;
+}
+
+function retrieveSaved() {
+    if (localStorage.getItem('mixed')) {
+        let arr = localStorage.getItem('mixed');
+        arr.forEach(part => {
+            savedMessageField.textContent += part;
+        })
+    }
 }
 
 function saveMessages() {
