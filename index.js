@@ -1,4 +1,4 @@
-const words = ['a', 'an', 'apple', 'ATEEZ', 'banana', 'boom', 'cucumber', 'commander', 'chk-chk', 'delta', 'demure', 'delicious', 'ecstatic', 'ecosystem', 'eco-round', 'fr', 'fun', 'F', 'function', 'facts', 'gay', 'greasy', 'Gary', 'girlie', 'homo', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'hehehehaw', 'her', 'his', 'him', 'hersheys', 'HALA', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'ingles', 'Instagram', 'jajajaja', 'Joker', 'jizz', 'jazz', 'Jalil', 'joemama', 'jungle', 'kalm', 'KKK', 'key', 'kitten', 'kebab', 'kick', 'kindergarteners', 'kaleidoscopical', 'Li', 'L', 'loser', 'ligma', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'NCT', 'nidda', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'narcoterrorism', 'oh', 'ofc', 'of', 'oak', 'oath', 'oat', 'oasis', 'oblong', 'object', 'obliviousness', 'omg', /*p*/ 'pfp', 'penis', 'play', 'pluck', 'paki', 'PEW PEW PEW', 'packing', 'packs', /*t*/ 'turrents', 'turrets', /*s*/, 'SKZ' , /*p*/, 'pneumonoultramicroscopicsilicovolcanoconiosis'];
+const words = ['a', 'an', 'apple', 'banana', 'boom', 'cucumber', 'commander', 'delta', 'delicious', 'ecstatic', 'ecosystem', 'fun', 'function', 'facts', 'greasy', 'girlie', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'her', 'his', 'him', 'hersheys', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'Instagram', 'Joker', 'joke', 'jazz',  'jungle', 'key', 'kitten', 'kebab', 'kick', 'kaleidoscopical', 'L', 'loser', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'oh', 'of', 'oak', 'oath', 'oat', 'oasis', 'object', 'obliviousness', 'omg', /*p*/ 'play', 'pluck', 'packing', 'packs', /*t*/'turrets' /*p*/, 'pneumonoultramicroscopicsilicovolcanoconiosis'];
 const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
@@ -88,6 +88,7 @@ makePhrase();
 grammarCheck();
 
 //browser functionality down there
+
 
 function retrieveSaved() {
     console.log('retrieveSaved() is invoked');
