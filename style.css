@@ -8,6 +8,10 @@ header {
     text-align: center;
 }
 
+header ul {
+    display: inline-block;
+}
+
 main {
     display: flex;
     justify-content: center;
