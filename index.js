@@ -1,4 +1,4 @@
-const words = ['apple', 'ATEEZ', 'banana', 'boom', 'cucumber', 'commander', 'chk-chk', 'delta', 'demure', 'delicious', 'ecstatic', 'ecosystem', 'eco-round', 'fr', 'fun', 'F', 'function', 'facts', 'gay', 'greasy', 'Gary', 'girlie', 'homo', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'hehehehaw', 'her', 'his', 'him', 'hersheys', 'HALA', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'ingles', 'Instagram', 'jajajaja', 'Joker', 'jizz', 'jazz', 'Jalil', 'joemama', 'jungle', 'kalm', 'KKK', 'key', 'kitten', 'kebab', 'kick', 'kindergarteners', 'kaleidoscopical', 'Li', 'L', 'loser', 'ligma', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'NCT', 'nidda', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'narcoterrorism', 'oh', 'ofc', 'of', 'oak', 'oath', 'oat', 'oasis', 'oblong', 'object', 'obliviousness', 'omg', 'pp', 'pfp', 'penis', 'play', 'pluck', 'paki', 'PEW PEW PEW', 'packing', 'packs', 't', 'turrents', 'turrets', 's', 'SKZ' , 'p', 'pneumonoultramicroscopicsilicovolcanoconiosis'];
+const words = ['a', 'an', 'apple', 'ATEEZ', 'banana', 'boom', 'cucumber', 'commander', 'chk-chk', 'delta', 'demure', 'delicious', 'ecstatic', 'ecosystem', 'eco-round', 'fr', 'fun', 'F', 'function', 'facts', 'gay', 'greasy', 'Gary', 'girlie', 'homo', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'hehehehaw', 'her', 'his', 'him', 'hersheys', 'HALA', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'ingles', 'Instagram', 'jajajaja', 'Joker', 'jizz', 'jazz', 'Jalil', 'joemama', 'jungle', 'kalm', 'KKK', 'key', 'kitten', 'kebab', 'kick', 'kindergarteners', 'kaleidoscopical', 'Li', 'L', 'loser', 'ligma', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'NCT', 'nidda', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'narcoterrorism', 'oh', 'ofc', 'of', 'oak', 'oath', 'oat', 'oasis', 'oblong', 'object', 'obliviousness', 'omg', /*p*/ 'pfp', 'penis', 'play', 'pluck', 'paki', 'PEW PEW PEW', 'packing', 'packs', /*t*/ 'turrents', 'turrets', /*s*/, 'SKZ' , /*p*/, 'pneumonoultramicroscopicsilicovolcanoconiosis'];
 const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
@@ -44,20 +44,30 @@ function makeMessage(count) {
 
 function grammarCheck() {
     let temp = sentence.split(' ');
+    let i = 0;
     //console.log(temp[1]) // second word
-    if (temp[0] === 'A' || temp[0] === 'An'){
-        vowels.forEach(vowel => {
-            //console.log(temp);
-            let firstLetterOfSecondWord = temp[1].charAt(0);
-            if (firstLetterOfSecondWord.toLowerCase() === vowel) {
-                temp[0] = 'An';
-            } else if (firstLetterOfSecondWord.toLowerCase() !== vowel) {
-                temp[0] = 'A';
-            } else {
-                throw Error("Error at grammar check on vowels, what did you do?");
-            }
-        })
-    }
+    temp.forEach((word) => {
+        //console.log(`words in sentence: ${word}`)
+        if (word === 'A' || word === 'An')
+        {
+            console.log(`A or An at index ${i}`)
+            vowels.forEach(vowel => {
+                //console.log(temp);
+                let firstLetterOfSecondWord = temp[i + 1].charAt(0);
+                //console.log(`first letter of 2nd word: ${firstLetterOfSecondWord}`);
+                if (firstLetterOfSecondWord.toLowerCase() === vowel) {
+                    temp[i] = 'An';
+                    console.log(`The letter is a vowel!`);
+                } else if (firstLetterOfSecondWord.toLowerCase() !== vowel) {
+                    temp[i] = 'A';
+                    console.log(`The letter is not a vowel.`);
+                } else {
+                    throw Error("Error at grammar check on vowels, what did you do?");
+                }
+            })
+        }
+        i++;
+    })
     //console.log(temp)
     return temp.join(" ");
 }
