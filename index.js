@@ -3,6 +3,7 @@ const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 let message = [];
+const savedMixedMessages = []
 sentence = '';
 
 const paragraph = document.getElementById('mixMessageInput');
@@ -79,6 +80,20 @@ function grammarCheck() {
     sentence = temp.join(" ");
     updateHTML();
     return sentence;
+}
+
+function saveMessages() {
+    if (savedMixedMessages) {
+        savedMixedMessages.forEach(savedMessage => {
+            if (savedMessage === sentence) {
+                return 'It already exists';
+            } else {
+                savedMixedMessages.push(sentence);
+            }
+        })
+    }
+    localStorage.removeItem('mixed');
+    localStorage.setItem('mixed', savedMixedMessages);
 }
 
 console.log(makePhrase());
