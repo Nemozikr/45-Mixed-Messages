@@ -23,6 +23,7 @@ main {
 #messageDiv {
     display: grid;
     position: relative;
+    cursor: pointer;
     margin: 10px 0;
     width: 50%;
     justify-content: center;
@@ -30,10 +31,18 @@ main {
     background-color: lightslategray;
 }
 
+
+
+
 #saved {
     display: block;
+    border: black 1px solid;
+    max-width: 75%;
+    height: 300px;
+    overflow: auto;
 }
 
 #saved li {
     list-style-type: none;
+    margin: 5px 0;
 }

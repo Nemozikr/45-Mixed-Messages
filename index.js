@@ -1,5 +1,5 @@
 
-const words = ['a', 'an', 'apple', 'banana', 'boom', 'cucumber', 'commander', 'delta', 'delicious', 'ecstatic', 'ecosystem', 'fun', 'function', 'facts', 'greasy', 'girlie', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'her', 'his', 'him', 'hersheys', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'Instagram', 'Joker', 'joke', 'jazz',  'jungle', 'key', 'kitten', 'kebab', 'kick', 'kaleidoscopical', 'L', 'loser', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'oh', 'of', 'oak', 'oath', 'oat', 'oasis', 'object', 'obliviousness', 'omg', /*p*/ 'play', 'pluck', 'packing', 'packs', /*t*/'turrets' /*p*/, 'pneumonoultramicroscopicsilicovolcanoconiosis'];
+const words = ['<bruh>', 'a', 'an', 'apple', 'banana', 'boom', 'cucumber', 'commander', 'delta', 'delicious', 'ecstatic', 'ecosystem', 'fun', 'function', 'facts', 'greasy', 'girlie', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'her', 'his', 'him', 'hersheys', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'Instagram', 'Joker', 'joke', 'jazz',  'jungle', 'key', 'kitten', 'kebab', 'kick', 'kaleidoscopical', 'L', 'loser', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'oh', 'of', 'oak', 'oath', 'oat', 'oasis', 'object', 'obliviousness', 'omg', /*p*/ 'play', 'pluck', 'packing', 'packs', /*t*/'turrets' /*p*/, 'pneumonoultramicroscopicsilicovolcanoconiosis'];
 const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
@@ -8,6 +8,7 @@ let savedMixedMessages = [];
 sentence = '';
 
 const paragraph = document.getElementById('mixMessageInput');
+const paragraphDiv = document.getElementById('messageDiv');
 const savedMessageField = document.getElementById('savedMessages');
 const saveButton = document.getElementById('saveMessage');
 const clearButton = document.getElementById('clearSaved');
@@ -37,15 +38,23 @@ function randomWord() {
     return words[randomArr(words)];
 }
 
-function makePhrase(num = randomSize()) {
-    sentence = (`${randomConnective()} ${makeMessage(num)}${randomPunct()}`);
+function makeSentence() {
+    return (`${randomConnective()} ${makeMessage()}${randomPunct()}`);
+}
+
+function makePhrase() {
+    console.log(message);
+    sentence = makeSentence();
     //console.log(sentence);
+    console.log(message);
     sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
     updateHTML();
+    message = [];
+    console.log(message);
     return sentence;
 }
 
-function makeMessage(count) {
+function makeMessage(count = randomSize()) {
     while(message.length < count) {
         let word = randomWord();
         if (message.indexOf(word) === -1) {
@@ -130,6 +139,7 @@ function saveMessages() {
         // Check for duplicates
         if (savedMixedMessages.includes(sentence)) {
             console.log('It already exists');
+            window.alert('Message already saved!');
             return 'It already exists';
         } else {
             console.log('Sentence added!');
@@ -178,7 +188,7 @@ function removeMessage(event) {
 }
 
 // Event Listeners
-paragraph.onclick(makePhrase);
+paragraphDiv.addEventListener('click', makePhrase);
 
 saveButton.addEventListener('click', saveMessages);
 
