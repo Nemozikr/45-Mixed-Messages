@@ -1,3 +1,4 @@
+
 const words = ['a', 'an', 'apple', 'banana', 'boom', 'cucumber', 'commander', 'delta', 'delicious', 'ecstatic', 'ecosystem', 'fun', 'function', 'facts', 'greasy', 'girlie', 'Himalayas', 'hermit', 'haram', 'halal', 'hello', 'hi', 'hippopotomonstrosesquippedaliophobia', 'hippo', 'huge', 'hehe', 'her', 'his', 'him', 'hersheys', 'invoice', 'invitation', 'invoke', 'illegal', 'irregular', 'Instagram', 'Joker', 'joke', 'jazz',  'jungle', 'key', 'kitten', 'kebab', 'kick', 'kaleidoscopical', 'L', 'loser', 'lacking', 'labour', 'labouriousnessess', 'lobotomy', 'lobotomisations', 'my', 'me', 'mad', 'man', 'macaron', 'madman', 'maggot', 'macrolinguistic', 'no', 'Nero', 'nerd', 'nap', 'naan', 'nachos', 'narrow', 'nasty', 'names', 'name', 'naive', 'oh', 'of', 'oak', 'oath', 'oat', 'oasis', 'object', 'obliviousness', 'omg', /*p*/ 'play', 'pluck', 'packing', 'packs', /*t*/'turrets' /*p*/, 'pneumonoultramicroscopicsilicovolcanoconiosis'];
 const starts = ['a', 'an', 'and', 'is', 'the', 'of', 'it', 'what'];
 const punct = [".", ",", "!", "?", "!?"];
@@ -10,6 +11,7 @@ const paragraph = document.getElementById('mixMessageInput');
 const savedMessageField = document.getElementById('savedMessages');
 const saveButton = document.getElementById('saveMessage');
 const clearButton = document.getElementById('clearSaved');
+const removeButtons = document.getElementsByClassName('removeButton');
 
 function updateHTML() {
     paragraph.innerHTML = sentence;
@@ -102,6 +104,9 @@ function retrieveSaved() {
         savedMixedMessages = [];
     }
 
+    savedMixedMessages = savedMixedMessages.map(message => {
+        return ("<li>"+message+"<button class='removeButton'>X</button></li>")
+    })
     // Create a string with sentences separated by newlines
     let displayText = savedMixedMessages.join('<br>');
 
@@ -156,8 +161,17 @@ function clearSavedMessages() {
     console.log('All saved messages cleared.');
 }
 
+function removeMessage(input) {
+    console.log(this);
+}
+
 // Event Listeners
 saveButton.addEventListener('click', saveMessages);
+if (removeButtons){
+    for (let i = 0; i < removeButtons.length; i++) {
+        removeButtons[i].addEventListener('click', removeMessage);
+    }
+};
 clearButton.addEventListener('click', clearSavedMessages);
 
 // Initial Load
