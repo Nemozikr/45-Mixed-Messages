@@ -98,24 +98,20 @@ function retrieveSaved() {
     // Retrieve and parse the data from localStorage
     savedMixedMessages = JSON.parse(localStorage.getItem('mixed')) || [];
 
-    // Ensure it's a flat array
-    if (!Array.isArray(savedMixedMessages)) {
-        console.warn('Invalid data in localStorage, resetting to an empty array.');
-        savedMixedMessages = [];
-    }
+    // Clear current messages to avoid duplication
+    savedMessageField.innerHTML = '';
 
-    savedMixedMessages = savedMixedMessages.map(message => {
-        return ("<li>"+message+"<button class='removeButton'>X</button></li>")
-    })
-    // Create a string with sentences separated by newlines
-    let displayText = savedMixedMessages.join('<br>');
+    // Create list items with remove buttons
+    savedMixedMessages.forEach((message) => {
+        const li = document.createElement('li');
+        li.textContent = message;
 
-    // Display the text in the desired field
-    savedMessageField.innerHTML = displayText;
+        const button = document.createElement('button');
+        button.textContent = 'X';
+        button.className = 'removeButton';
 
-    // Log each sentence for debugging
-    savedMixedMessages.forEach((part, index) => {
-        console.log(`Sentence ${index + 1}: ${part}`);
+        li.appendChild(button);
+        savedMessageField.appendChild(li);
     });
 }
 
@@ -161,17 +157,32 @@ function clearSavedMessages() {
     console.log('All saved messages cleared.');
 }
 
-function removeMessage(input) {
-    console.log(this);
+function removeMessage(event) {
+    const button = event.target; // The clicked button
+    const liElement = button.closest('li'); // Find the closest <li> ancestor
+
+    if (liElement) {
+        const messageText = liElement.textContent.slice(0, -1); // Exclude the "X" button text
+
+        // Remove from the DOM
+        liElement.remove();
+
+        // Remove from savedMixedMessages array
+        savedMixedMessages = savedMixedMessages.filter(msg => !msg.includes(messageText));
+
+        // Update localStorage
+        localStorage.setItem('mixed', JSON.stringify(savedMixedMessages));
+    }
 }
 
 // Event Listeners
 saveButton.addEventListener('click', saveMessages);
-if (removeButtons){
-    for (let i = 0; i < removeButtons.length; i++) {
-        removeButtons[i].addEventListener('click', removeMessage);
+document.getElementById('savedMessages').addEventListener('click', function (event) {
+    if (event.target.classList.contains('removeButton')) {
+        removeMessage(event);
     }
-};
+});
+
 clearButton.addEventListener('click', clearSavedMessages);
 
 // Initial Load

@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    border: 1px red dashed;
+    /*border: 1px red dashed;*/
 }
 
 header {
@@ -32,4 +32,8 @@ main {
 
 #saved {
     display: block;
+}
+
+#saved li {
+    list-style-type: none;
 }
