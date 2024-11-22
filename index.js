@@ -7,6 +7,11 @@ let message = [];
 let savedMixedMessages = [];
 sentence = '';
 
+const paragraph = document.getElementById('mixMessageInput');
+const savedMessageField = document.getElementById('savedMessages');
+const saveButton = document.getElementById('saveMessage');
+const clearButton = document.getElementById('clearSaved');
+const removeButtons = document.getElementsByClassName('removeButton');
 
 function updateHTML() {
     paragraph.innerHTML = sentence;
@@ -86,11 +91,7 @@ grammarCheck();
 
 //browser functionality down there
 
-const paragraph = document.getElementById('mixMessageInput');
-const savedMessageField = document.getElementById('savedMessages');
-const saveButton = document.getElementById('saveMessage');
-const clearButton = document.getElementById('clearSaved');
-const removeButtons = document.getElementsByClassName('removeButton');
+
 
 
 function retrieveSaved() {
@@ -177,7 +178,10 @@ function removeMessage(event) {
 }
 
 // Event Listeners
+paragraph.onclick(makePhrase);
+
 saveButton.addEventListener('click', saveMessages);
+
 document.getElementById('savedMessages').addEventListener('click', function (event) {
     if (event.target.classList.contains('removeButton')) {
         removeMessage(event);
