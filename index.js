@@ -12,7 +12,7 @@ const saveButton = document.getElementById('saveMessage');
 const clearButton = document.getElementById('clearSaved');
 
 function updateHTML() {
-    paragraph.textContent = sentence;
+    paragraph.innerHTML = sentence;
 }
 
 function randomSize(max = 10, min = 1) {
