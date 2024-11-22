@@ -7,11 +7,6 @@ let message = [];
 let savedMixedMessages = [];
 sentence = '';
 
-const paragraph = document.getElementById('mixMessageInput');
-const savedMessageField = document.getElementById('savedMessages');
-const saveButton = document.getElementById('saveMessage');
-const clearButton = document.getElementById('clearSaved');
-const removeButtons = document.getElementsByClassName('removeButton');
 
 function updateHTML() {
     paragraph.innerHTML = sentence;
@@ -90,6 +85,12 @@ makePhrase();
 grammarCheck();
 
 //browser functionality down there
+
+const paragraph = document.getElementById('mixMessageInput');
+const savedMessageField = document.getElementById('savedMessages');
+const saveButton = document.getElementById('saveMessage');
+const clearButton = document.getElementById('clearSaved');
+const removeButtons = document.getElementsByClassName('removeButton');
 
 
 function retrieveSaved() {
